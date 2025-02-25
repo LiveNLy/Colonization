@@ -7,18 +7,33 @@ public class BaseMenu : MonoBehaviour
     [SerializeField] private Button _placeFlagButton;
     [SerializeField] private Transform _buttonPointToMove;
 
+    private Base _base;
+
     private Vector2 _buttonStartPosition;
 
     private void OnEnable()
     {
-        _mouseClickDetection.BaseClicked += ShowButton;
+        _mouseClickDetection.BaseClicked += SetClickedBase;
+        _mouseClickDetection.FlagSetted += SetFlagPosition;
         _placeFlagButton.onClick.AddListener(HideButton);
     }
 
     private void OnDisable()
     {
-        _mouseClickDetection.BaseClicked -= ShowButton;
+        _mouseClickDetection.BaseClicked -= SetClickedBase;
+        _mouseClickDetection.FlagSetted -= SetFlagPosition;
         _placeFlagButton.onClick.RemoveListener(HideButton);
+    }
+
+    private void SetFlagPosition(Vector3 point)
+    {
+        _base.SetFlag(point);
+    }
+
+    private void SetClickedBase(Base @base)
+    {
+        _base = @base;
+        ShowButton();
     }
 
     private void ShowButton()
@@ -29,7 +44,7 @@ public class BaseMenu : MonoBehaviour
 
     private void HideButton()
     {
-        _mouseClickDetection.ChangeBool();
+        _mouseClickDetection.ChangePressingState();
         _placeFlagButton.transform.position = _buttonStartPosition;
     }
 }

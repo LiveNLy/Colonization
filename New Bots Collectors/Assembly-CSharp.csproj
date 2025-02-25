@@ -64,19 +64,23 @@
     <Compile Include="Assets\Scripts\Bot\BotCollisionHandler.cs" />
     <Compile Include="Assets\Scripts\Base\BaseCollisionHandler.cs" />
     <Compile Include="Assets\Scripts\Base\Base.cs" />
-    <Compile Include="Assets\Scripts\Allocators\BaseBotsGarage.cs" />
     <Compile Include="Assets\Scripts\Resourse\ResourseSpawner.cs" />
+    <Compile Include="Assets\Scripts\Base\BotBuilder.cs" />
     <Compile Include="Assets\Scripts\Bot\Bot.cs" />
     <Compile Include="Assets\Scripts\Allocators\ResourceAllocator.cs" />
     <Compile Include="Assets\Scripts\Bot\GrabPoint.cs" />
     <Compile Include="Assets\Scripts\Flags\MouseClickDetection.cs" />
+    <Compile Include="Assets\Scripts\Base\BaseBotsGarage.cs" />
+    <Compile Include="Assets\Scripts\Flags\Ground.cs" />
     <Compile Include="Assets\Scripts\UI\BaseMenu.cs" />
     <Compile Include="Assets\Scripts\Base\ResourceStorage.cs" />
     <Compile Include="Assets\Scripts\Base\BaseDeliveryPoint.cs" />
+    <Compile Include="Assets\Scripts\Base\BaseBuilder.cs" />
     <Compile Include="Assets\Scripts\Bot\BotMover.cs" />
     <Compile Include="Assets\Scripts\Resourse\Resource.cs" />
     <Compile Include="Assets\Scripts\Base\Sorter.cs" />
     <Compile Include="Assets\Scripts\UI\TextCounter.cs" />
+    <Compile Include="Assets\Scripts\Base\FlagSetter.cs" />
     <Compile Include="Assets\Scripts\Base\Scanner.cs" />
     <Compile Include="Assets\Scripts\Allocators\Allocator.cs" />
   </ItemGroup>

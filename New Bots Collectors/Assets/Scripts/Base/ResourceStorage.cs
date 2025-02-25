@@ -10,15 +10,15 @@ public class ResourceStorage : MonoBehaviour
     private BaseCollisionHandler _baseCollisionHandler;
     private BaseBotsGarage _botsGarage;
     private Base _warehouseBase;
-    private Flag _flag;
+    private Vector3 _flagPosition;
     private int _resourcesForBotCheck = 3;
     private int _resourcesForBaseCheck = 5;
     private bool _isFlagStands;
     private WaitForSeconds _wait = new WaitForSeconds(1);
 
-    public event Action<int> TextChanging;
+    public event Action<int> TextChanged;
     public event Action<Resource> ResourceCollected;
-    public event Action<Flag> EnoughResourcesForBase;
+    public event Action EnoughResourcesForBase;
     public event Action EnoughResourcesForBot;
 
     private void OnEnable()
@@ -43,16 +43,16 @@ public class ResourceStorage : MonoBehaviour
         _warehouseBase.FlagSetted -= SetMission;
     }
 
-    private void SetMission(Flag flag)
+    private void SetMission(Vector3 flagPosition)
     {
-        _flag = flag;
+        _flagPosition = flagPosition;
         ChangeBool();
     }
 
     private void CollectResource(Resource resource)
     {
         ResourceCollected?.Invoke(resource);
-        TextChanging?.Invoke(_collectedResources.Count);
+        TextChanged?.Invoke(_collectedResources.Count);
         _collectedResources.Add(resource);
     }
 
@@ -68,7 +68,7 @@ public class ResourceStorage : MonoBehaviour
             {
                 if (_botsGarage.FreeObjects.Count + _botsGarage.OcupiedObjects.Count != 1)
                 {
-                    EnoughResourcesForBase?.Invoke(_flag);
+                    EnoughResourcesForBase?.Invoke();
                     ChangeBool();
                 }
                 else
@@ -89,6 +89,6 @@ public class ResourceStorage : MonoBehaviour
     private void RemoveResources(int count)
     {
         _collectedResources.RemoveRange(0, count);
-        TextChanging?.Invoke(_collectedResources.Count - 1);
+        TextChanged?.Invoke(_collectedResources.Count - 1);
     }
 }

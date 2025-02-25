@@ -11,7 +11,7 @@ public class BotCollisionHandler : MonoBehaviour
 
     public event Action<Resource> TouchedResourse;
     public event Action TouchedBase;
-    public event Action BuildingBase;
+    public event Action BaseBuilded;
 
     private void OnEnable()
     {
@@ -35,21 +35,21 @@ public class BotCollisionHandler : MonoBehaviour
         else if (other.gameObject.TryGetComponent(out Flag flag))
         {
             if (_targetFlag == flag)
-                BuildingBase?.Invoke();
+                BaseBuilded?.Invoke();
         }
     }
 
-    public void GetTargetBase(Base targetBase)
+    public void SetTargetBase(Base targetBase)
     {
         _targetBase = targetBase;
     }
 
-    public void GetTargetFlag(Flag flag)
+    public void SetTargetFlag(Flag flag)
     {
         _targetFlag = flag;
     }
 
-    public void GetTargetResource(Resource resource)
+    public void SetTargetResource(Resource resource)
     {
         _targetResourse = resource;
     }

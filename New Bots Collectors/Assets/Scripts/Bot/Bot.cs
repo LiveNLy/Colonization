@@ -14,19 +14,19 @@ public class Bot : MonoBehaviour
 
     public bool GotMission => _isGotMission;
 
-    public event Action<Vector3> Moving;
-    public event Action<Bot, Flag> ChangingBase;
-    public event Action Stoping;
+    public event Action<Vector3> Moved;
+    public event Action<Bot, Vector3> BaseChanged;
+    public event Action Stoped;
 
     private void OnEnable()
     {
         _collisionHandler = GetComponent<BotCollisionHandler>();
         _grabPoint = GetComponentInChildren<GrabPoint>();
-        GetNewBase();
+        TakeNewBase();
 
-        _collisionHandler.TouchedResourse += GetResource;
-        _collisionHandler.TouchedBase += GetToBase;
-        _collisionHandler.BuildingBase += BuildingBase;
+        _collisionHandler.TouchedResourse += TakeResource;
+        _collisionHandler.TouchedBase += TouchBase;
+        _collisionHandler.BaseBuilded += BuildingBase;
     }
 
     private void Update()
@@ -36,44 +36,44 @@ public class Bot : MonoBehaviour
 
     private void OnDisable()
     {
-        _collisionHandler.TouchedResourse -= GetResource;
-        _collisionHandler.TouchedBase -= GetToBase;
-        _collisionHandler.BuildingBase -= BuildingBase;
+        _collisionHandler.TouchedResourse -= TakeResource;
+        _collisionHandler.TouchedBase -= TouchBase;
+        _collisionHandler.BaseBuilded -= BuildingBase;
     }
 
-    public void GetNewBase()
+    public void TakeNewBase()
     {
         _base = GetComponentInParent<Base>();
         _basePoint = _base.GetComponentInChildren<BaseDeliveryPoint>();
 
-        _collisionHandler.GetTargetBase(_base);
+        _collisionHandler.SetTargetBase(_base);
     }
 
-    public void GetResourceMission(Resource resourse)
+    public void TakeResourceMission(Resource resourse)
     {
-        Stoping?.Invoke();
+        Stoped?.Invoke();
         _isGotMission = true;
-        _collisionHandler.GetTargetResource(resourse);
-        Moving?.Invoke(resourse.transform.position);
+        _collisionHandler.SetTargetResource(resourse);
+        Moved?.Invoke(resourse.transform.position);
     }
 
-    public void GetBaseMission(Flag flag)
+    public void TakeBaseMission(Flag flag)
     {
         _targetFlag = flag;
-        Stoping?.Invoke();
+        Stoped?.Invoke();
         _isGotMission = true;
-        _collisionHandler.GetTargetFlag(flag);
-        Moving?.Invoke(flag.transform.position);
+        _collisionHandler.SetTargetFlag(flag);
+        Moved?.Invoke(flag.transform.position);
     }
 
     private void BuildingBase()
     {
-        Stoping?.Invoke();
+        Stoped?.Invoke();
         _isGotMission = false;
-        ChangingBase?.Invoke(this, _targetFlag);
+        BaseChanged?.Invoke(this, _targetFlag.transform.position);
     }
 
-    private void GetToBase()
+    private void TouchBase()
     {
         _isGotMission = false;
     }
@@ -84,12 +84,12 @@ public class Bot : MonoBehaviour
         _gatheredResourse = null;
     }
 
-    private void GetResource(Resource resourse)
+    private void TakeResource(Resource resourse)
     {
         _gatheredResourse = resourse;
         resourse.ResourceReleased += DropResource;
-        Stoping?.Invoke();
-        Moving?.Invoke(_basePoint.transform.position);
+        Stoped?.Invoke();
+        Moved?.Invoke(_basePoint.transform.position);
     }
 
     private void GatherResource()

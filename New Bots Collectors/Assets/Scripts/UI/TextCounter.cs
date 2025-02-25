@@ -13,12 +13,12 @@ public class TextCounter : MonoBehaviour
         _resourceStorage = GetComponentInParent<ResourceStorage>();
         _text = GetComponent<TextMeshProUGUI>();
 
-        _resourceStorage.TextChanging += Count;
+        _resourceStorage.TextChanged += Count;
     }
 
     private void OnDisable()
     {
-        _resourceStorage.TextChanging -= Count;
+        _resourceStorage.TextChanged -= Count;
     }
 
     private void Count(int count)

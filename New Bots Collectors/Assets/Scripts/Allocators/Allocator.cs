@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Allocator<T> : MonoBehaviour
+public class Allocator<T> : MonoBehaviour where T : MonoBehaviour
 {
     protected List<T> _freeObjects = new();
     protected List<T> _occupiedObjects = new();

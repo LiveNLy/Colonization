@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "D:\\Projects\\New Bots Collectors\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\base\\scanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\scanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\base\\basebotsgarage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\basebotsgarage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\base\\sorter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\sorter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\allocators\\resourceallocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\allocators\\resourceallocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\base\\basebuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\basebuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Scanner.cs",
-              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\Scanner.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\Scanner.cs",
-              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\Scanner.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\Scanner.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Title": "BaseBotsGarage.cs",
+              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBotsGarage.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\BaseBotsGarage.cs",
+              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBotsGarage.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\BaseBotsGarage.cs",
+              "ViewState": "AQIAAGAAAAAAAAAAAAA3wHsAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T07:49:43.097Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ResourceAllocator.cs",
-              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Allocators\\ResourceAllocator.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Allocators\\ResourceAllocator.cs",
-              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Allocators\\ResourceAllocator.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Allocators\\ResourceAllocator.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T07:49:38.165Z",
+              "WhenOpened": "2025-02-25T17:25:45.38Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Sorter.cs",
-              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\Sorter.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\Sorter.cs",
-              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\Sorter.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\Sorter.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "BaseBuilder.cs",
+              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBuilder.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\BaseBuilder.cs",
+              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBuilder.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\BaseBuilder.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T07:49:44.775Z",
+              "WhenOpened": "2025-02-25T17:04:14.348Z",
               "EditorCaption": ""
             }
           ]

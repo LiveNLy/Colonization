@@ -1,24 +1,26 @@
 using System;
 using UnityEngine;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 [RequireComponent(typeof(ResourceAllocator), typeof(BaseBotsGarage))]
 public class Base : MonoBehaviour
 {
-    private Flag _flag;
+    private FlagSetter _flagSetter;
     private ResourceAllocator _resourceAllocator;
     private BaseBotsGarage _botsGarage;
     private bool _isBaseReadyToBuild = false;
 
-    public event Action<Flag> FlagSetted;
+    public event Action<Vector3> FlagSetted;
 
     private void OnEnable()
     {
         _resourceAllocator = GetComponent<ResourceAllocator>();
         _botsGarage = GetComponent<BaseBotsGarage>();
-        _flag = GetComponentInChildren<Flag>();
+        _flagSetter = GetComponent<FlagSetter>();
 
-        _botsGarage.BuildingBase += ConstructionReadiness;
-        _botsGarage.ReturnFlag += ReturnFlag;
+        _botsGarage.BaseBuilded += ConstructionReadiness;
+        _botsGarage.FlagReturned += ReturnFlag;
+        _botsGarage.SettedParentForBot += SetChildBot;
     }
 
     private void LateUpdate()
@@ -28,19 +30,25 @@ public class Base : MonoBehaviour
 
     private void OnDisable()
     {
-        _botsGarage.BuildingBase -= ConstructionReadiness;
-        _botsGarage.ReturnFlag -= ReturnFlag;
+        _botsGarage.BaseBuilded -= ConstructionReadiness;
+        _botsGarage.FlagReturned -= ReturnFlag;
+        _botsGarage.SettedParentForBot -= SetChildBot;
     }
 
     public void SetFlag(Vector3 flagPosition)
     {
-        _flag.transform.position = flagPosition;
-        FlagSetted?.Invoke(_flag);
+        _flagSetter.SetFlag(flagPosition);
+        FlagSetted?.Invoke(_flagSetter.Flag.transform.position);
+    }
+
+    private void SetChildBot(Bot bot)
+    {
+        bot.gameObject.transform.SetParent(transform);
     }
 
     private void ReturnFlag()
     {
-        _flag.transform.position = transform.position;
+        _flagSetter.ReturnFlag();
     }
 
     private void ConstructionReadiness()
@@ -85,13 +93,13 @@ public class Base : MonoBehaviour
         _resourceAllocator.UnfreedResources(resource);
         _botsGarage.UnfreedBot(bot);
 
-        bot.GetResourceMission(resource);
+        bot.TakeResourceMission(resource);
     }
 
     private void DispatchBotForBase(Bot bot)
     {
         _botsGarage.UnfreedBot(bot);
 
-        bot.GetBaseMission(_flag);
+        bot.TakeBaseMission(_flagSetter.Flag);
     }
 }

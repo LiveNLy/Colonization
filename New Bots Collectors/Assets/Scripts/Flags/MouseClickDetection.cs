@@ -5,16 +5,16 @@ public class MouseClickDetection : MonoBehaviour
 {
     private Camera _camera;
     private bool _basePressed;
-    private Base _baseForFlag;
 
-    public event Action BaseClicked;
+    public event Action<Vector3> FlagSetted;
+    public event Action<Base> BaseClicked;
 
-    void Awake()
+    private void Awake()
     {
         _camera = Camera.main;
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -23,21 +23,20 @@ public class MouseClickDetection : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.collider.gameObject.tag == "Base" && !_basePressed)
+                if (hit.collider.gameObject.TryGetComponent(out Base @base) && !_basePressed)
                 {
-                    _baseForFlag = hit.collider.gameObject.GetComponent<Base>();
-                    BaseClicked?.Invoke();
+                    BaseClicked?.Invoke(@base);
                 }
-                else if (hit.collider.gameObject.tag == "Ground" && _basePressed)
+                else if (hit.collider.gameObject.TryGetComponent(out Ground ground) && _basePressed)
                 {
-                    _baseForFlag.SetFlag(hit.point);
-                    ChangeBool();
+                    FlagSetted?.Invoke(hit.point);
+                    ChangePressingState();
                 }
             }
         }
     }
 
-    public void ChangeBool()
+    public void ChangePressingState()
     {
         _basePressed = !_basePressed;
     }

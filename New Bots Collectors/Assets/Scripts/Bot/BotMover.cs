@@ -14,14 +14,14 @@ public class BotMover : MonoBehaviour
     {
         _bot = GetComponent<Bot>();
 
-        _bot.Moving += StartMove;
-        _bot.Stoping += StopMove;
+        _bot.Moved += StartMove;
+        _bot.Stoped += StopMove;
     }
 
     private void OnDisable()
     {
-        _bot.Moving -= StartMove;
-        _bot.Stoping -= StopMove;
+        _bot.Moved -= StartMove;
+        _bot.Stoped -= StopMove;
     }
 
     private void StartMove(Vector3 targetPosition)
