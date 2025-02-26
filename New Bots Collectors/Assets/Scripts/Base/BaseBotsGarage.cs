@@ -6,11 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(ResourceStorage))]
 public class BaseBotsGarage : Allocator<Bot>
 {
-    private ResourceStorage _resourceStorage;
     private BotBuilder _botBuilder;
     private BaseBuilder _baseBuilder;
-    private int _priceForBot = 3;
-    private int _priceForBase = 5;
     private int _radius = 5;
     private int _yPositionForSetBase = 5;
     private WaitForSeconds _wait = new WaitForSeconds(0.5f);
@@ -18,34 +15,38 @@ public class BaseBotsGarage : Allocator<Bot>
     public List<Bot> FreeObjects => _freeObjects;
     public List<Bot> OcupiedObjects => _occupiedObjects;
 
-    public event Action<int> BotCreated;
-    public event Action<int> BaseCreated;
     public event Action<Bot> SettedParentForBot;
-    public event Action BaseBuilded;
     public event Action FlagReturned;
 
     private void OnEnable()
     {
         _baseBuilder = GetComponentInParent<BaseBuilder>();
-        _resourceStorage = GetComponent<ResourceStorage>();
-        _botBuilder = GetComponent<BotBuilder>();
+        _botBuilder = GetComponentInParent<BotBuilder>();
         FillList();
-
-        _resourceStorage.EnoughResourcesForBot += SetNewBot;
-        _resourceStorage.EnoughResourcesForBase += StartBuildBase;
         StartCoroutine(FreeBot());
     }
 
-    private void OnDisable()
+    public void GiveBotBaseMission(Bot bot, Flag flag)
     {
-        _resourceStorage.EnoughResourcesForBot -= SetNewBot;
-        _resourceStorage.EnoughResourcesForBase -= StartBuildBase;
-    }
-
-    public void UnfreedBot(Bot bot)
-    {
+        bot.TakeBaseMission(flag);
         _occupiedObjects.Add(bot);
         _freeObjects.Remove(bot);
+    }
+
+    public void GiveBotResourceMission(Bot bot, Resource resource)
+    {
+        bot.TakeResourceMission(resource);
+        _occupiedObjects.Add(bot);
+        _freeObjects.Remove(bot);
+    }
+
+    public Bot CreateNewBot(Base @base)
+    {
+        Bot bot = _botBuilder.CreateBot(@base);
+        _freeObjects.Add(bot);
+        bot.BaseChanged += SetNewBase;
+
+        return bot;
     }
 
     private void FreedBot()
@@ -71,26 +72,6 @@ public class BaseBotsGarage : Allocator<Bot>
             FreedBot();
 
             yield return _wait;
-        }
-    }
-
-    private void SetNewBot()
-    {
-        if (_freeObjects.Count != 0)
-        {
-            Bot bot = _botBuilder.CreateBot();
-            _freeObjects.Add(bot);
-            bot.BaseChanged += SetNewBase;
-            BotCreated?.Invoke(_priceForBot);
-        }
-    }
-
-    private void StartBuildBase()
-    {
-        if (_freeObjects.Count + _occupiedObjects.Count > 1)
-        {
-            BaseBuilded?.Invoke();
-            BaseCreated?.Invoke(_priceForBase);
         }
     }
 

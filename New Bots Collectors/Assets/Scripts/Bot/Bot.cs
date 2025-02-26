@@ -5,22 +5,21 @@ using UnityEngine;
 public class Bot : MonoBehaviour
 {
     private Base _base;
+    private Resource _gatheredResourse;
     private BaseDeliveryPoint _basePoint;
     private BotCollisionHandler _collisionHandler;
+    private BotMover _mover;
     private GrabPoint _grabPoint;
-    private Flag _targetFlag;
     private bool _isGotMission = false;
-    private Resource _gatheredResourse;
 
     public bool GotMission => _isGotMission;
 
-    public event Action<Vector3> Moved;
     public event Action<Bot, Vector3> BaseChanged;
-    public event Action Stoped;
 
     private void OnEnable()
     {
         _collisionHandler = GetComponent<BotCollisionHandler>();
+        _mover = GetComponent<BotMover>();
         _grabPoint = GetComponentInChildren<GrabPoint>();
         TakeNewBase();
 
@@ -51,26 +50,25 @@ public class Bot : MonoBehaviour
 
     public void TakeResourceMission(Resource resourse)
     {
-        Stoped?.Invoke();
+        _mover.StopMove();
         _isGotMission = true;
         _collisionHandler.SetTargetResource(resourse);
-        Moved?.Invoke(resourse.transform.position);
+        _mover.StartMove(resourse.transform.position);
     }
 
     public void TakeBaseMission(Flag flag)
     {
-        _targetFlag = flag;
-        Stoped?.Invoke();
+        _mover.StopMove();
         _isGotMission = true;
         _collisionHandler.SetTargetFlag(flag);
-        Moved?.Invoke(flag.transform.position);
+        _mover.StartMove(flag.transform.position);
     }
 
-    private void BuildingBase()
+    private void BuildingBase(Vector3 basePosition)
     {
-        Stoped?.Invoke();
+        _mover.StopMove();
         _isGotMission = false;
-        BaseChanged?.Invoke(this, _targetFlag.transform.position);
+        BaseChanged?.Invoke(this, basePosition);
     }
 
     private void TouchBase()
@@ -84,12 +82,12 @@ public class Bot : MonoBehaviour
         _gatheredResourse = null;
     }
 
-    private void TakeResource(Resource resourse)
+    public void TakeResource(Resource resourse)
     {
         _gatheredResourse = resourse;
         resourse.ResourceReleased += DropResource;
-        Stoped?.Invoke();
-        Moved?.Invoke(_basePoint.transform.position);
+        _mover.StopMove();
+        _mover.StartMove(_basePoint.transform.position);
     }
 
     private void GatherResource()

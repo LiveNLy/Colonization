@@ -2,17 +2,12 @@ using UnityEngine;
 
 public class BotBuilder : MonoBehaviour
 {
-    private Base _base;
+    [SerializeField] private Bot _botPrefab;
 
-    private void OnEnable()
+    public Bot CreateBot(Base @base)
     {
-        _base = GetComponent<Base>();
-    }
-
-    public Bot CreateBot()
-    {
-        Bot bot = Instantiate(_base.GetComponentInChildren<Bot>(), _base.transform);
-        bot.transform.position = _base.transform.position;
+        Bot bot = Instantiate(_botPrefab, @base.transform);
+        bot.transform.position = @base.transform.position;
         bot.gameObject.SetActive(true);
         return bot;
     }

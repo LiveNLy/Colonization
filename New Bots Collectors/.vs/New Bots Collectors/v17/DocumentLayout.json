@@ -1,54 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Projects\\New Bots Collectors\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\base\\basebotsgarage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\basebotsgarage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\base\\basebuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\basebuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BaseBotsGarage.cs",
-              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBotsGarage.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\BaseBotsGarage.cs",
-              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBotsGarage.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\BaseBotsGarage.cs",
-              "ViewState": "AQIAAGAAAAAAAAAAAAA3wHsAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T17:25:45.38Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BaseBuilder.cs",
-              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBuilder.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\BaseBuilder.cs",
-              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBuilder.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Base\\BaseBuilder.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T17:04:14.348Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

@@ -1,26 +1,32 @@
 using System;
 using UnityEngine;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 [RequireComponent(typeof(ResourceAllocator), typeof(BaseBotsGarage))]
 public class Base : MonoBehaviour
 {
     private FlagSetter _flagSetter;
     private ResourceAllocator _resourceAllocator;
+    private ResourceStorage _resourceStorage;
     private BaseBotsGarage _botsGarage;
+    private BaseCollisionHandler _collisionHandler;
     private bool _isBaseReadyToBuild = false;
+    private int _resourcesForBase = 5;
+    private int _resourcesForBot = 3;
 
-    public event Action<Vector3> FlagSetted;
+    public event Action FlagSetted;
 
     private void OnEnable()
     {
+        _resourceStorage = GetComponent<ResourceStorage>();
         _resourceAllocator = GetComponent<ResourceAllocator>();
         _botsGarage = GetComponent<BaseBotsGarage>();
         _flagSetter = GetComponent<FlagSetter>();
+        _collisionHandler = GetComponent<BaseCollisionHandler>();
 
-        _botsGarage.BaseBuilded += ConstructionReadiness;
         _botsGarage.FlagReturned += ReturnFlag;
         _botsGarage.SettedParentForBot += SetChildBot;
+        _collisionHandler.BaseOnResourceCollected += OnResourceCollected;
+        _collisionHandler.ResourseCollected += ResourceCollected;
     }
 
     private void LateUpdate()
@@ -30,15 +36,65 @@ public class Base : MonoBehaviour
 
     private void OnDisable()
     {
-        _botsGarage.BaseBuilded -= ConstructionReadiness;
         _botsGarage.FlagReturned -= ReturnFlag;
         _botsGarage.SettedParentForBot -= SetChildBot;
+        _collisionHandler.BaseOnResourceCollected -= OnResourceCollected;
+        _collisionHandler.ResourseCollected -= ResourceCollected;
     }
-
     public void SetFlag(Vector3 flagPosition)
     {
         _flagSetter.SetFlag(flagPosition);
-        FlagSetted?.Invoke(_flagSetter.Flag.transform.position);
+        FlagSetted?.Invoke();
+    }
+
+    private void ResourceCollected(Resource resource)
+    {
+        _resourceStorage.CollectResource(resource);
+    }
+
+    private void OnResourceCollected()
+    {
+        if (_flagSetter.IsSet)
+        {
+            if (GetValidBotsNumberForNewBase())
+            {
+                if (_resourceStorage.CollectedResources >= _resourcesForBase)
+                {
+                    _isBaseReadyToBuild = true;
+                    _resourceStorage.RemoveResources(_resourcesForBase);
+
+                    return;
+                }
+
+                return;
+            }
+            else
+            {
+                CreateBot();
+            }
+        }
+
+        CreateBot();
+    }
+
+    private void CreateBot()
+    {
+        if (_resourceStorage.CollectedResources >= _resourcesForBot)
+        {
+            Bot bot = _botsGarage.CreateNewBot(this);
+
+            SetChildBot(bot);
+
+            _resourceStorage.RemoveResources(_resourcesForBot);
+        }
+    }
+
+    private bool GetValidBotsNumberForNewBase()
+    {
+        if (_botsGarage.FreeObjects.Count + _botsGarage.OcupiedObjects.Count > 1)
+            return true;
+
+        return false;
     }
 
     private void SetChildBot(Bot bot)
@@ -49,11 +105,6 @@ public class Base : MonoBehaviour
     private void ReturnFlag()
     {
         _flagSetter.ReturnFlag();
-    }
-
-    private void ConstructionReadiness()
-    {
-        _isBaseReadyToBuild = true;
     }
 
     private void GiveJobToBots()
@@ -91,15 +142,11 @@ public class Base : MonoBehaviour
     private void DispatchBotForResource(Bot bot, Resource resource)
     {
         _resourceAllocator.UnfreedResources(resource);
-        _botsGarage.UnfreedBot(bot);
-
-        bot.TakeResourceMission(resource);
+        _botsGarage.GiveBotResourceMission(bot, resource);
     }
 
     private void DispatchBotForBase(Bot bot)
     {
-        _botsGarage.UnfreedBot(bot);
-
-        bot.TakeBaseMission(_flagSetter.Flag);
+        _botsGarage.GiveBotBaseMission(bot, _flagSetter.Flag);
     }
 }

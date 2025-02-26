@@ -6,7 +6,8 @@ public class BaseCollisionHandler : MonoBehaviour
 {
     private ResourceAllocator _resourceAllocator;
 
-    public event Action<Resource> ResourseCollecting;
+    public event Action BaseOnResourceCollected;
+    public event Action<Resource> ResourseCollected;
 
     private void OnEnable()
     {
@@ -17,7 +18,8 @@ public class BaseCollisionHandler : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Resource resourse) && _resourceAllocator.OccupiedObjects.Contains(resourse))
         {
-            ResourseCollecting?.Invoke(resourse);
+            ResourseCollected?.Invoke(resourse);
+            BaseOnResourceCollected?.Invoke();
 
             resourse.ActionAfterHit();
         }

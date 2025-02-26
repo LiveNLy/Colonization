@@ -4,20 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(Bot))]
 public class BotCollisionHandler : MonoBehaviour
 {
-    private Bot _bot;
     private Resource _targetResourse;
     private Flag _targetFlag;
     private Base _targetBase;
 
     public event Action<Resource> TouchedResourse;
+    public event Action<Vector3> BaseBuilded;
     public event Action TouchedBase;
-    public event Action BaseBuilded;
-
-    private void OnEnable()
-    {
-        _bot = GetComponent<Bot>();
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,14 +21,13 @@ public class BotCollisionHandler : MonoBehaviour
         }
         else if (other.gameObject.TryGetComponent(out Base mainBase))
         {
-            if (_targetBase == mainBase && _bot.GotMission)
+            if (_targetBase == mainBase && GetComponent<Bot>().GotMission)
                 TouchedBase?.Invoke();
-
         }
         else if (other.gameObject.TryGetComponent(out Flag flag))
         {
             if (_targetFlag == flag)
-                BaseBuilded?.Invoke();
+                BaseBuilded?.Invoke(flag.transform.position);
         }
     }
 

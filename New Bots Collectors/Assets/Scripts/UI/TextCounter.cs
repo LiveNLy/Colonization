@@ -6,7 +6,6 @@ public class TextCounter : MonoBehaviour
 {
     private ResourceStorage _resourceStorage;
     private TextMeshProUGUI _text;
-    private int _count = 0;
 
     private void OnEnable()
     {
@@ -23,7 +22,6 @@ public class TextCounter : MonoBehaviour
 
     private void Count(int count)
     {
-        _count = count + 1;
-        _text.text = $"Ресурсы: {_count}";
+        _text.text = $"Ресурсы: {count}";
     }
 }

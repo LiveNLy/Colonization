@@ -6,30 +6,15 @@ public class BotMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
 
-    private Bot _bot;
     private Coroutine _coroutine;
     private WaitForFixedUpdate _wait;
 
-    private void OnEnable()
-    {
-        _bot = GetComponent<Bot>();
-
-        _bot.Moved += StartMove;
-        _bot.Stoped += StopMove;
-    }
-
-    private void OnDisable()
-    {
-        _bot.Moved -= StartMove;
-        _bot.Stoped -= StopMove;
-    }
-
-    private void StartMove(Vector3 targetPosition)
+    public void StartMove(Vector3 targetPosition)
     {
         _coroutine = StartCoroutine(Move(targetPosition));
     }
 
-    private void StopMove()
+    public void StopMove()
     {
         if (_coroutine != null)
             StopCoroutine(_coroutine);
