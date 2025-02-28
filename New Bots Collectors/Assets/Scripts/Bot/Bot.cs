@@ -7,25 +7,25 @@ public class Bot : MonoBehaviour
     private Base _base;
     private Resource _gatheredResourse;
     private BaseDeliveryPoint _basePoint;
+    private BaseBuilder _baseBuilder;
     private BotCollisionHandler _collisionHandler;
     private BotMover _mover;
     private GrabPoint _grabPoint;
-    private bool _isGotMission = false;
 
-    public bool GotMission => _isGotMission;
-
-    public event Action<Bot, Vector3> BaseChanged;
+    public bool GotMission { get; private set; } = false;
 
     private void OnEnable()
     {
         _collisionHandler = GetComponent<BotCollisionHandler>();
         _mover = GetComponent<BotMover>();
         _grabPoint = GetComponentInChildren<GrabPoint>();
+        _base = GetComponentInParent<Base>();
+        _baseBuilder = _base.GetComponentInParent<BaseBuilder>();
         TakeNewBase();
 
         _collisionHandler.TouchedResourse += TakeResource;
         _collisionHandler.TouchedBase += TouchBase;
-        _collisionHandler.BaseBuilded += BuildingBase;
+        _collisionHandler.BaseBuilded += BuildBase;
     }
 
     private void Update()
@@ -37,7 +37,7 @@ public class Bot : MonoBehaviour
     {
         _collisionHandler.TouchedResourse -= TakeResource;
         _collisionHandler.TouchedBase -= TouchBase;
-        _collisionHandler.BaseBuilded -= BuildingBase;
+        _collisionHandler.BaseBuilded -= BuildBase;
     }
 
     public void TakeNewBase()
@@ -51,7 +51,7 @@ public class Bot : MonoBehaviour
     public void TakeResourceMission(Resource resourse)
     {
         _mover.StopMove();
-        _isGotMission = true;
+        GotMission = true;
         _collisionHandler.SetTargetResource(resourse);
         _mover.StartMove(resourse.transform.position);
     }
@@ -59,21 +59,26 @@ public class Bot : MonoBehaviour
     public void TakeBaseMission(Flag flag)
     {
         _mover.StopMove();
-        _isGotMission = true;
+        GotMission = true;
         _collisionHandler.SetTargetFlag(flag);
         _mover.StartMove(flag.transform.position);
     }
 
-    private void BuildingBase(Vector3 basePosition)
+    private void BuildBase(Vector3 basePosition)
     {
         _mover.StopMove();
-        _isGotMission = false;
-        BaseChanged?.Invoke(this, basePosition);
+        GotMission = false;
+        Base newBase = _baseBuilder.BuildNewBase(basePosition);
+        _base.RemoveBot(this);
+        _base.ReturnFlag();
+        newBase.AddBot(this);
+        _base = newBase;
+        TakeNewBase();
     }
 
     private void TouchBase()
     {
-        _isGotMission = false;
+        GotMission = false;
     }
 
     private void DropResource()

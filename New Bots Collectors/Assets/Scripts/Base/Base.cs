@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(ResourceAllocator), typeof(BaseBotsGarage))]
@@ -13,8 +12,6 @@ public class Base : MonoBehaviour
     private int _resourcesForBase = 5;
     private int _resourcesForBot = 3;
 
-    public event Action FlagSetted;
-
     private void OnEnable()
     {
         _resourceStorage = GetComponent<ResourceStorage>();
@@ -23,9 +20,6 @@ public class Base : MonoBehaviour
         _flagSetter = GetComponent<FlagSetter>();
         _collisionHandler = GetComponent<BaseCollisionHandler>();
 
-        _botsGarage.FlagReturned += ReturnFlag;
-        _botsGarage.SettedParentForBot += SetChildBot;
-        _collisionHandler.BaseOnResourceCollected += OnResourceCollected;
         _collisionHandler.ResourseCollected += ResourceCollected;
     }
 
@@ -36,20 +30,34 @@ public class Base : MonoBehaviour
 
     private void OnDisable()
     {
-        _botsGarage.FlagReturned -= ReturnFlag;
-        _botsGarage.SettedParentForBot -= SetChildBot;
-        _collisionHandler.BaseOnResourceCollected -= OnResourceCollected;
         _collisionHandler.ResourseCollected -= ResourceCollected;
     }
+
+    public void RemoveBot(Bot bot)
+    {
+        _botsGarage.ForgetAboutBot(bot);
+    }
+
+    public void AddBot(Bot bot)
+    {
+        SetChildBot(bot);
+        _botsGarage.AddBot(bot);
+    }
+
     public void SetFlag(Vector3 flagPosition)
     {
         _flagSetter.SetFlag(flagPosition);
-        FlagSetted?.Invoke();
+    }
+
+    public void ReturnFlag()
+    {
+        _flagSetter.ReturnFlag();
     }
 
     private void ResourceCollected(Resource resource)
     {
         _resourceStorage.CollectResource(resource);
+        OnResourceCollected();
     }
 
     private void OnResourceCollected()
@@ -100,11 +108,6 @@ public class Base : MonoBehaviour
     private void SetChildBot(Bot bot)
     {
         bot.gameObject.transform.SetParent(transform);
-    }
-
-    private void ReturnFlag()
-    {
-        _flagSetter.ReturnFlag();
     }
 
     private void GiveJobToBots()

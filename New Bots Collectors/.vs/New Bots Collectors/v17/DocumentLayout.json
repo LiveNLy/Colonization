@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Projects\\New Bots Collectors\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\bot\\bot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bot\\bot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\base\\base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\base.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\base\\basebotsgarage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\base\\basebotsgarage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|d:\\projects\\new bots collectors\\assets\\scripts\\bot\\botcollisionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B969A8CC-45D1-3FC4-76F6-C174A7DD55EC}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bot\\botcollisionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BotCollisionHandler.cs",
+              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Bot\\BotCollisionHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Bot\\BotCollisionHandler.cs",
+              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Bot\\BotCollisionHandler.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Bot\\BotCollisionHandler.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwAsAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T03:05:27.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Base.cs",
+              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\Base.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\Base.cs",
+              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\Base.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\Base.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAA7wBUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T01:35:44.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BaseBotsGarage.cs",
+              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBotsGarage.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Base\\BaseBotsGarage.cs",
+              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Base\\BaseBotsGarage.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Base\\BaseBotsGarage.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T01:43:19.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Bot.cs",
+              "DocumentMoniker": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Bot\\Bot.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Bot\\Bot.cs",
+              "ToolTip": "D:\\Projects\\New Bots Collectors\\Assets\\Scripts\\Bot\\Bot.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Bot\\Bot.cs",
+              "ViewState": "AQIAADIAAAAAAAAAAAAqwEsAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T01:50:48.9Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
